@@ -9,11 +9,11 @@ define apt::ppa(
   include apt::params
 
   if ! $release {
-    fail("lsbdistcodename fact not available: release parameter required")
+    fail('lsbdistcodename fact not available: release parameter required')
   }
 
   exec { "apt-update-${name}":
-    command     => "/usr/bin/aptitude update",
+    command     => '/usr/bin/aptitude update',
     refreshonly => true,
   }
 

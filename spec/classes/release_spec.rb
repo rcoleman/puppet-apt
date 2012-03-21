@@ -14,7 +14,7 @@ describe 'apt::release', :type => :class do
     should contain_file("/etc/apt/apt.conf.d/01release").with({
       "owner"   => "root",
       "group"   => "root",
-      "mode"    => 644,
+      "mode"    => "0644",
       "content" => "APT::Default-Release \"#{param_set[:release_id]}\";"
     })
   }

@@ -3,17 +3,17 @@ define apt::key (
   $ensure = present,
   $key_content = false,
   $key_source = false,
-  $key_server = "keyserver.ubuntu.com"
+  $key_server = 'keyserver.ubuntu.com'
 ) {
 
   include apt::params
 
   if $key_content {
-    $method = "content"
+    $method = 'content'
   } elsif $key_source {
-    $method = "source"
+    $method = 'source'
   } elsif $key_server {
-    $method = "server"
+    $method = 'server'
   }
 
   # This is a hash of the parts of the key definition that we care about.
@@ -26,12 +26,12 @@ define apt::key (
   # apt::source resources that all reference the same key.
   case $ensure {
     present: {
-      if defined(Exec["apt::key $key absent"]) {
-        fail ("Cannot ensure Apt::Key[$key] present; $key already ensured absent")
-      } elsif !defined(Exec["apt::key $key present"]) {
+      if defined(Exec["apt::key ${key} absent"]) {
+        fail ("Cannot ensure Apt::Key[${key}] present; ${key} already ensured absent")
+      } elsif !defined(Exec["apt::key ${key} present"]) {
         # this is a marker to ensure we don't simultaneously define a key
         # ensure => absent AND ensure => present
-        exec { "apt::key $key present":
+        exec { "apt::key ${key} present":
           path   => "/",
           onlyif => "/bin/false",
           noop   => true;
@@ -54,11 +54,11 @@ define apt::key (
         fail ("Cannot ensure Apt::Key[$key] absent; $key already ensured present")
       }
       exec { "apt::key $key absent":
-        path    => "/bin:/usr/bin",
+        path    => '/bin:/usr/bin',
         onlyif  => "apt-key list | grep '$key'",
         command => "apt-key del '$key'",
-        user    => "root",
-        group   => "root",
+        user    => 'root',
+        group   => 'root',
       }
     }
     default: {

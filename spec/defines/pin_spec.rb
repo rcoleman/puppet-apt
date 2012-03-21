@@ -31,7 +31,7 @@ describe 'apt::pin', :type => :define do
           'ensure'  => "file",
           'owner'   => "root",
           'group'   => "root",
-          'mode'    => "644",
+          'mode'    => "0644",
           'content' => "# #{title}\nPackage: #{param_hash[:packages]}\nPin: release a=#{title}\nPin-Priority: #{param_hash[:priority]}"
         })
       }

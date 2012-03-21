@@ -1,4 +1,5 @@
 require 'rake'
+require 'puppet-lint/tasks/puppet-lint' # enables 'rake lint'
 
 task :default => [:spec]
 
@@ -11,4 +12,3 @@ desc "Build package"
 task :build do
   system("puppet-module build")
 end
-

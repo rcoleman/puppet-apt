@@ -70,7 +70,7 @@ describe 'apt::source', :type => :define do
           'ensure'    => "file",
           'owner'     => "root",
           'group'     => "root",
-          'mode'      => 644,
+          'mode'      => "0644",
           'content'   => content
         })
       }
